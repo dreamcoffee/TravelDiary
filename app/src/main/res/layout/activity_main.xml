@@ -10,42 +10,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <!-- 여기에 상단 내용을 배치합니다 -->
-
+        android:layout_weight="1"
+        android:id="@+id/containers"
+        android:orientation="vertical">
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+
+            android:id="@+id/bottom_navMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="일기" />
+            android:layout_gravity="bottom"
+            app:labelVisibilityMode="labeled"
+            app:itemBackground="@color/white"
+            app:menu="@menu/bottom_menu"
+            />
+    </FrameLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="예산" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일정" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="체크리스트" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
-
-
-    </LinearLayout>
 
 </LinearLayout>
