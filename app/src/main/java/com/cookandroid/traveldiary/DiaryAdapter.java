@@ -37,4 +37,10 @@ public class DiaryAdapter extends ArrayAdapter<DiaryEntry> {
 
         return convertView;
     }
+
+    public void removeItem(int position) {
+        if (position >= 0 && position < getCount()) {
+            remove(getItem(position));
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -39,7 +40,6 @@ public class diary extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.diary, container, false);
-        View main = inflater.inflate(R.layout.activity_main, container, false);
 
         addBtn = v.findViewById(R.id.addBtn);
         diaryListView = v.findViewById(R.id.diaryListView);
@@ -47,13 +47,22 @@ public class diary extends Fragment{
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDiaryDialog();
+                showDiaryDialog(); // 일기 작성 창을 띄우는 메서드 호출
             }
         });
 
-        entries = loadDiaryEntries(); // 저장된 일기 데이터를 로드
+        entries = loadDiaryEntries();
         adapter = new DiaryAdapter(getContext(), entries);
         diaryListView.setAdapter(adapter);
+
+        diaryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 리스트의 요소를 클릭하면 수정할 수 있는 창을 띄움
+                DiaryEntry selectedEntry = entries.get(position);
+                showEditDiaryDialog(selectedEntry, position);
+            }
+        });
 
         return v;
     }
@@ -88,6 +97,51 @@ public class diary extends Fragment{
                 currentDay++; // 다음 일기를 위해 일기 번호 증가
                 saveDiaryEntries(entries); // 일기 데이터 저장
                 dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void showEditDiaryDialog(DiaryEntry entry, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View dialogView = getLayoutInflater().inflate(R.layout.edit_diary_dialog, null);
+        builder.setView(dialogView);
+
+        EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
+        EditText contentEditText = dialogView.findViewById(R.id.contentEditText);
+        Button saveBtn = dialogView.findViewById(R.id.saveBtn);
+        Button deleteBtn = dialogView.findViewById(R.id.deleteBtn);
+
+        titleEditText.setText(entry.getTitle());
+        contentEditText.setText(entry.getContent());
+
+        AlertDialog dialog = builder.create();
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newTitle = titleEditText.getText().toString();
+                String newContent = contentEditText.getText().toString();
+                DiaryEntry updatedEntry = new DiaryEntry(newTitle, entry.getDate(), newContent);
+                entries.set(position, updatedEntry);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+                // 파일 내용 변경
+                saveDiaryEntries(entries);
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                entries.remove(position);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+                // 파일 내용 변경
+                saveDiaryEntries(entries);
             }
         });
 
