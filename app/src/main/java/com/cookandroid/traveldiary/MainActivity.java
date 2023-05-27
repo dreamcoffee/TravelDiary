@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-    private diary diary;
+    private Diary diary;
     private expenditure expenditure;
     private schedule schedule;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         expenditure = new expenditure();
         schedule = new schedule();
-        diary = new diary();
+        diary = new Diary();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.containers, diary).commit();
 
@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, diary).commit();
                         return true;
                     case R.id.item_schedule:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, expenditure).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, schedule).commit();
                         return true;
                     case R.id.item_expenditure:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, schedule).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, expenditure).commit();
                         return true;
                     case R.id.item_test:
                         return true;

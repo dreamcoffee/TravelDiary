@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class diary extends Fragment{
+public class Diary extends Fragment{
     private ListView diaryListView;
     private Button addBtn;
     private DiaryAdapter adapter;
