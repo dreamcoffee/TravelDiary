@@ -126,6 +126,7 @@ public class Schedule extends Fragment {
         EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
         EditText contentEditText = dialogView.findViewById(R.id.contentEditText);
         Button saveBtn = dialogView.findViewById(R.id.saveBtn);
+        Button deleteBtn = dialogView.findViewById(R.id.deleteBtn);
 
         // 추가된 부분 시작일과 종료일을 설정할 EditText와 관련 코드
         startDateEditText = dialogView.findViewById(R.id.startTravelDate); // 수정: 변수명 변경
@@ -163,6 +164,18 @@ public class Schedule extends Fragment {
                 saveScheduleEntries(entries);
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                entries.remove(position);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+                // 파일 내용 변경
+                saveScheduleEntries(entries);
             }
         });
 

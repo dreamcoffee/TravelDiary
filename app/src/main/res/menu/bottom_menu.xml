@@ -30,7 +30,7 @@
         android:id="@+id/item_test"
         android:enabled="true"
         android:icon="@drawable/ic_test"
-        android:title="테스트"
+        android:title="준비중"
         app:showAsAction="always"
         />
 </menu>

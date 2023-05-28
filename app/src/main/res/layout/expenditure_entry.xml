@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지출 총합 : "
-            android:textSize="20dp"/>
+            android:text="지출일 : "/>
 
         <TextView
-            android:id="@+id/totalSpendTextView"
+            android:id="@+id/spendDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/expendListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/addBtn"
+    <TextView
+        android:id="@+id/spendTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="지출 작성" />
-
+        android:textColor="@android:color/holo_red_light"/>
 </LinearLayout>
