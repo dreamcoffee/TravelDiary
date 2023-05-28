@@ -10,15 +10,15 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     private Diary diary;
-    private expenditure expenditure;
-    private schedule schedule;
+    private Expenditure expenditure;
+    private Schedule schedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        expenditure = new expenditure();
-        schedule = new schedule();
+        expenditure = new Expenditure();
+        schedule = new Schedule();
         diary = new Diary();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.containers, diary).commit();
